@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数楽問題倉庫</title>
+	<link rel="stylesheet" href="assets/css/feed.css">
+	<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [["$$", "$$"]]
+        },
+        options: {
+            enableMenu: false
+        }
+    };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo">
+        <div class="links">
+            <a href="index.html">問題を解く</a>
+            <a href="make.html">問題を作る</a>
+        </div>
+    </header>
+    <main>
+        <div class="filter" id="filter">
+            <button type="button" id="createdAt-fil" class="on">追加順</button>
+            <button type="button" id="difficulty-fil" class="NA">正答率順</button>
+        </div>
+        <div class="main" id="main">
+            <!--
+            <div class="problem">
+                <span class="category">分野: C</span>
+                <span class="creator">作者: lit-kei</span>
+                <h3 class="title">境目</h3>
+                <p class="content">某進学校1年7組で，男子 $26$ 人と女子 $14$ 人が席に着く．前後左右の机と机に挟まれる通路は $67$ 個あるが，このうち男女に挟まれる通路を **境目** と呼ぶ．このとき，$40!$ 通りの席の着き方全てについて，それぞれの境目の総数の総和を $N$ とする．$N$ について次の形式で回答せよ．--$N$ のうち大きい方から $3$ 種類の素因数と，素因数 $2$ の個数を，例を参考に出力せよ．$$\text{(例)} \quad N = 19 \times 7^3 \times 5^2 \times 3^3 \times 2^2$$ のように素因数分解されるとき，パスワードは「19(1),7(3),5(2),2」となる．ただし，すべて半角で入力せよ．</p>
+            
+
+            </div>
+        </div>-->
+
+        
+    </main>
+    
+    <div class="search-modal" id="search-modal">
+        <div class="spinner" id="spinner"></div>
+    </div>
+	
+	 <script src="assets/js/feed.js" type="module"></script>
+</body>
+</html>
