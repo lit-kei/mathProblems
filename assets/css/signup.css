@@ -1,0 +1,14 @@
+.login {
+    border-bottom: 1px solid #777;
+    cursor: pointer;
+}
+.signup {
+    border-bottom: 2px solid rgb(255, 53, 53);
+}
+.loginhover span {
+    text-decoration: underline;
+}
+.signup span {
+    color: rgb(255, 53, 53);
+    font-weight: 600;
+}

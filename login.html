@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数楽問題倉庫</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/login-style.css">
+	<link rel="stylesheet" href="assets/css/login.css">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo" onclick="window.location.href = 'index.html'">
+        <div class="links">
+            <a href="index.html">問題を解く</a>
+            <a href="make.html">問題を作る</a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="header">
+                <div class="wrapper login">
+                    <span>ログイン</span>
+                </div>
+                <div class="wrapper signup" onclick="window.location.href = 'signup.html'">
+                    <span>新規登録</span>
+                </div>
+            </div>
+            <div class="main" id="main">
+                <form id="login-form">
+                    <div class="cp_iptxt">
+                        <label class="ef">
+                            <input
+    id="number"
+    type="text"
+    placeholder="生徒番号 (学生証を参照)"
+    required
+    minlength="7"
+    maxlength="7"
+    pattern="[0-9]+"
+    autocomplete="off">
+                        </label>
+                        <span>半角数字7桁で入力してください．</span>
+                    </div>
+                
+                    <div class="cp_iptxt">
+                        <label class="ef"><input id="password" type="password" placeholder="パスワード" required autocomplete="off"></label>
+                         <button type="button" onclick="passwordview()"><i class="fa fa-eye-slash"></i></button>
+                    </div>
+                    <button type="submit" id="submit-btn" class="button">ログイン</button>
+                </form>
+                <div class="error-msg" id="error-msg"><span>入力された内容が正しくありません．</span></div>
+            </div>
+            <span class="message" id="message">ログイン済みです．</span>
+        </div>
+    </main>
+    
+
+	
+	 <script src="assets/js/login.js" type="module"></script>
+</body>
+</html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数楽問題倉庫</title>
+	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/feed.css">
 	<script>
     window.MathJax = {
@@ -22,10 +23,22 @@
 </head>
 <body>
     <header>
-        <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo">
+        <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo" onclick="window.location.href = 'index.html'">
         <div class="links">
             <a href="index.html">問題を解く</a>
             <a href="make.html">問題を作る</a>
+        </div>
+        <div>
+            
+            <button class="login-btn" id="login-btn" onclick="window.location.href = `login.html`">
+            <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span>ログイン</span>
+            </button>
+            <span id="user-name"></span>
         </div>
     </header>
     <main>
@@ -42,10 +55,10 @@
                 <p class="content">某進学校1年7組で，男子 $26$ 人と女子 $14$ 人が席に着く．前後左右の机と机に挟まれる通路は $67$ 個あるが，このうち男女に挟まれる通路を **境目** と呼ぶ．このとき，$40!$ 通りの席の着き方全てについて，それぞれの境目の総数の総和を $N$ とする．$N$ について次の形式で回答せよ．--$N$ のうち大きい方から $3$ 種類の素因数と，素因数 $2$ の個数を，例を参考に出力せよ．$$\text{(例)} \quad N = 19 \times 7^3 \times 5^2 \times 3^3 \times 2^2$$ のように素因数分解されるとき，パスワードは「19(1),7(3),5(2),2」となる．ただし，すべて半角で入力せよ．</p>
             
 
-            </div>
-        </div>-->
+            </div>-->
+        </div>
 
-        
+        <button type="button" id="button">ログアウトできるよ</button>
     </main>
     
     <div class="search-modal" id="search-modal">

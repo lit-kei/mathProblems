@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数楽問題倉庫</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/login-style.css">
+	<link rel="stylesheet" href="assets/css/signup.css">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo" onclick="window.location.href = 'index.html'">
+        <div class="links">
+            <a href="index.html">問題を解く</a>
+            <a href="make.html">問題を作る</a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="header">
+                <div class="wrapper login" onclick="window.location.href = 'login.html'">
+                    <span>ログイン</span>
+                </div>
+                <div class="wrapper signup">
+                    <span>新規登録</span>
+                </div>
+            </div>
+            <div class="main" id="main">
+                <form id="login-form">
+                
+                    <div class="row">
+                        <span>学年</span>
+                        <label class="selectbox">
+                            <select id="grade" required>
+                                <option value="">選択してください</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <span>クラス</span>
+                        <label class="selectbox">
+                            <select id="class-number" required>
+                                <option value="">選択してください</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <span>出席番号</span>
+                        <label class="selectbox">
+                            <select id="student-number" required>
+                                <option value="">選択してください</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="cp_iptxt">
+                        <label class="ef">
+                            <input
+    id="number"
+    type="text"
+    placeholder="生徒番号 (学生証を参照)"
+    required
+    minlength="7"
+    maxlength="7"
+    pattern="[0-9]+"
+    autocomplete="off">
+                        </label>
+                        <span>半角数字7桁で入力してください．</span>
+                    </div>
+                    <div class="cp_iptxt">
+                        <label class="ef">
+                            <input
+    id="username"
+    type="text"
+    placeholder="ユーザー名"
+    required
+    minlength="3"
+    maxlength="20"
+    pattern="[A-Za-z0-9]+"
+    autocomplete="off">
+                        </label>
+                        <span>半角英数字を用いて3文字以上10文字以下で構成してください．</span>
+                    </div>
+                    <div class="cp_iptxt">
+                        
+                        <label class="ef">
+                            <input
+    id="password"
+    type="password"
+    placeholder="パスワード"
+    required
+    autocomplete="off"
+    minlength="8">
+                        </label>
+                        <span>8文字以上である必要があります．</span>
+                         <button type="button" onclick="passwordview('password', 'i1')"><i class="fa fa-eye-slash" id="i1"></i></button>
+                    </div>
+                    <div class="cp_iptxt">
+                        
+                        <label class="ef">
+                            <input
+    id="password-check"
+    type="password"
+    placeholder="パスワード (再入力)"
+    required
+    autocomplete="off"
+    minlength="8">
+                        </label>
+                         <button type="button" onclick="passwordview('password-check', 'i2')"><i class="fa fa-eye-slash" id="i2"></i></button>
+                    </div>
+                    <button type="submit" id="submit-btn" class="button">新規登録</button>
+                </form>
+                <div class="error-msg" id="error-msg"><span id="error-txt">入力された内容が正しくありません．</span></div>
+    
+
+            </div>
+            <span class="message" id="message">ログイン済みです．</span>
+        </div>
+    </main>
+    
+
+	
+	 <script src="assets/js/signup.js" type="module"></script>
+</body>
+</html>

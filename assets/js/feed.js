@@ -1,6 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 import { 
     getFirestore, 
     initializeFirestore,
@@ -39,6 +46,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth(app);
 const db = initializeFirestore(app, {
   localCache: {
     memory: true,        // メモリキャッシュ
@@ -46,6 +54,29 @@ const db = initializeFirestore(app, {
     cacheSizeBytes: CACHE_SIZE_UNLIMITED, // キャッシュサイズの上限
   }
 });
+
+const login = document.getElementById("login-btn");
+const userName = document.getElementById("user-name");
+let userID = "";
+const userCache = new Map();
+
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        // ログイン済み
+        login.style.display = "none";
+        userID = user.uid;
+        await getDoc(doc(db, "users", user.uid)).then(snapshot => {
+            const data = snapshot.data();
+            userName.innerHTML = `ようこそ，<span class="name ${data.color}">${data.username}</span>`;
+            userCache.set(user.uid, data);
+        });
+    } else {
+        // 未ログイン
+        login.style.display = "flex";
+        userName.textContent = "";
+    }
+});
+
 
 const colors = {
     "A": "#c85151",
@@ -68,22 +99,51 @@ modal.style.display = "block";
 
 const snapshot = await getDocs(q);
 
+const uids = [...new Set(snapshot.docs.map(post => post.data().creator))];
+
+await Promise.all(
+    uids.map(async (uid) => {
+        if (userCache.has(uid)) return;
+
+        const snap = await getDoc(doc(db, "users", uid));
+        console.log(snap.exists());
+
+        if (snap.exists()) {
+            userCache.set(uid, snap.data());
+        } else {
+            userCache.set(uid, {
+                username: undefined
+            });
+        }
+    })
+);
+
 snapshot.forEach(post => {
     const data = post.data();
     const content = marked.parse(data.content);
+    const user = userCache.get(post.data().creator);
     const problem = document.createElement("div");
     problem.className = "problem";
     problem.innerHTML = `
     <span class="category" style="background-color: ${colors[data.category]}">分野: ${data.category}</span>
-    <span class="creator">作者: <span class="name">${data.creator}</span></span>
+    <span class="creator"><span class="name ${user.color}">${user.username ?? "***"}</span></span>
     <h3 class="title">${data.title}</h3>
     <div class="content">${content}</div>
     `;
     problem.addEventListener('click', () => {
         window.location.href = `solve.html?id=${post.id}`;
     });
+    problem.style.animationDelay = `${Math.random() * 0.4}s`;
     fragment.append(problem);
 });
 main.append(fragment);
 await MathJax.typesetPromise([main]);
 modal.style.display = "none";
+
+document.getElementById("button").addEventListener('click', async () => {
+    try {
+        await signOut(auth)
+    } catch (e) {
+        console.log(e)
+    }
+});
