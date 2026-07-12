@@ -1,0 +1,299 @@
+.container {
+    display: flex;
+    padding: 15px;
+    max-width: 1000px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 50px auto;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+#main {
+    width: 80%;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+}
+.container h3 {
+    margin: 0 0 10px;
+}
+
+.cp_iptxt:not(.textarea) {
+    position: relative;
+    max-width: 320px;
+    width: 100%;
+    text-align: start;
+    margin: 10px 0;
+    align-self: flex-start;
+}
+.cp_iptxt input[type='text'],
+.cp_iptxt input[type='password'],
+textarea {
+  font: 15px/1.6 sans-serif;
+  width: 100%;
+  padding: 0.3em;
+  color: #4b4b4b;
+  border: none;
+  border-bottom: 2px solid #9b9b9b;
+  background: transparent;
+  transition: 0.3s;
+}
+.cp_iptxt .ef input[type='text']:focus,
+.cp_iptxt input[type='password']:focus,
+textarea:focus {
+  border-bottom: 2px solid #3cda5e;
+  outline: none;
+}
+.cp_iptxt span {
+    font-size: 13px;
+    color: rgb(105, 105, 105);
+}
+.cp_iptxt:not(.textarea) span {
+    margin-left: 80px;
+}
+
+.cp_iptxt h4 {
+    margin: 0;
+    display: inline;
+    width: 70px;
+}
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.input-row h4 {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.input-row .ef {
+    flex: 1;
+}
+
+.input-row input {
+    width: 100%;
+}
+
+.cp_iptxt textarea {
+    height: 250px;
+    resize: none;
+    overflow-y: auto;
+    border: 2px solid #9b9b9b;
+}
+.cp_iptxt textarea:focus {
+    border: 2px solid #3cda5e;
+}
+.cp_iptxt.textarea {
+    width: 100%;
+    
+    text-align: start;
+}
+
+.addition {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.additional-info {
+    display: flex;
+    flex-direction: column;
+}
+.preview-btn {
+  margin:0;
+  padding:5px 20px;
+  height: 38px;
+  border:none;
+  background:none;
+  cursor: pointer;
+  color: #333;
+  border: 1px solid #777;
+  background-color: white;
+  transition: all 0.3s;
+}
+.preview-btn:hover {
+    background-color: #eee;
+}
+
+.preview-container {
+    width: 100%;
+    text-align: start;
+    margin-bottom: 20px;
+}
+.preview-container h4 {
+    margin: 0;
+}
+.preview {
+    font-size: 16px;
+}
+
+.submitted {
+    display: inline-block;
+    background-color: #abc6ff;
+    border-radius: 5px;
+    padding: 3px 0;
+    width: 90px;
+    font-weight: 500;
+    color: #333;
+
+}
+.approved {
+    display: inline-block;
+    background-color: #83ffbb;
+    border-radius: 5px;
+    padding: 3px 0;
+    width: 90px;
+    font-weight: 500;
+    color: #333;
+
+}
+.rejected {
+    display: inline-block;
+    background-color: #ffa099;
+    border-radius: 5px;
+    padding: 3px 0;
+    width: 90px;
+    font-weight: 500;
+    color: #333;
+
+}
+
+.buttons {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+button.blue {
+    margin: 0;
+}
+
+button.red {
+    background: none;
+    outline: none;
+    border: none;
+    color: rgb(255, 33, 33);
+    cursor: pointer;
+    padding: 8px 15px;
+    margin: 0;
+    transition: all 0.3s;
+}
+button.red:hover {
+    background: #eee;
+}
+
+form.NA button[type="submit"] {
+    background: #eee;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.row {
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+    margin-bottom: 10px;
+}
+.row h4 {
+    width: 70px; /* すべて同じ幅 */
+}
+
+
+
+.selectbox {
+    position: relative;
+}
+
+.selectbox::before,
+.selectbox::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+.selectbox::before {
+    right: 0;
+    display: inline-block;
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: 0 3px 3px 0;
+    background-color: #3cda5e;
+    content: '';
+}
+
+.selectbox::after {
+    position: absolute;
+    top: 50%;
+    right: 1.1em;
+    transform: translate(50%, -50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-bottom: 3px solid #fff;
+    border-right: 3px solid #fff;
+    content: '';
+}
+
+.selectbox select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 130px;
+    height: 2.2em;
+    padding: .4em 3.6em .4em .8em;
+    border: 2px solid #3cda5e;
+    border-radius: 3px;
+    color: #333333;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.selectbox select:focus {
+    outline: 1px solid #3cda5e;
+}
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%) translateY(20px);
+
+    background: #1ea73c;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    font-weight: 500;
+
+
+    font-size: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s, transform .3s;
+    z-index: 10000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+    }
+    .addition {
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 20px;
+    }
+}

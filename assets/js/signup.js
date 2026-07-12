@@ -120,6 +120,7 @@ form.addEventListener("submit", async (e) => {
         const user = userCredential.user;
 
         await setDoc(doc(db, "users", user.uid), {
+            authorization: false,
             username: username.value,
             grade: Number(grade.value),
             class: Number(cls.value),
