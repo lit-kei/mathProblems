@@ -143,6 +143,7 @@ form.addEventListener('submit', async (e) => {
                     title: title.value
                 }, { merge: true });
                 showToast("公開しました");
+                hasUnsavedChanges = false;
             }
         } else {
             const newProblem = await setDoc(doc(db, "posts", problemID), {
