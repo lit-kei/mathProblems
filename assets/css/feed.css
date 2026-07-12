@@ -47,22 +47,27 @@ main {
 
 .problem {
     position: relative;
-    width: 360px;
+    width: 380px;
     height: 200px;
     border-radius: 10px;
-    border: 1px solid black;
     cursor: pointer;
     background-color: white;
     padding: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     
     animation: bounceIn 0.4s ease-out forwards;
     transform: scale(0.9);
     opacity: 0;
 }
+.problem svg {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
 .problem .category {
     position: absolute;
-    left: 8px;
-    top: 10px;
+    left: 15px;
+    bottom: 8px;
     border-radius: 10px;
     background-color: black;
     color: white;
@@ -72,8 +77,8 @@ main {
 }
 .problem .creator {
     position: absolute;
-    right: 8px;
-    top: 10px;
+    right: 15px;
+    bottom: 8px;
     border-radius: 10px;
     padding: 3px 10px;
     font-weight: 400;
@@ -86,7 +91,7 @@ main {
 
 .problem .content {
     padding: 0 10px;
-    margin-top: 18px;
+    margin-top: 10px;
     width: 100%;    
     max-height: 100px;
     overflow: hidden;
@@ -106,39 +111,6 @@ main {
     margin: 0;
 }
 
-
-.search-modal {
-  position: fixed;
-  display: none;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(200,200,200,0.5);
-  justify-content: center;
-  align-items: center;
-}
-.spinner {
-    position: absolute;
-    display: block;
-    width: 100px;
-    height: 100px;
-    border: 10px solid #aaa;
-    border-top: 10px solid #a0ffa0;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    top: 50%;
-    left: 50%;
-    z-index: 100;
-}
-
-@keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
 
 
 @keyframes bounceIn {

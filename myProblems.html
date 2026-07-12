@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数楽問題倉庫</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/myProblems.css">
+	<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [["$$", "$$"]]
+        },
+        options: {
+            enableMenu: false
+        }
+    };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo" onclick="window.location.href = 'index.html'">
+        <div class="links">
+            <a href="index.html">問題を解く</a>
+            <a href="myProblems.html">問題を作る</a>
+        </div>
+        <div>
+            
+            <button class="login-btn" id="login-btn" onclick="window.location.href = `login.html`">
+            <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span>ログイン</span>
+            </button>
+            <span id="user-name"></span>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="main">
+                <button class="blue" id="new-btn">新規作成</button>
+                <h3>問題一覧</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <th>タイトル</th>
+                            <th>最終更新日時</th>
+                            <th>状態</th>
+                        </thead>
+                        <tbody id="tbody">
+                            <!--<tr>
+                                <td>境目</td>
+                                <td>2026-07-12</td>
+                                <td>approved</td>
+                            </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <span id="message" class="message">問題を作成するには <a href="login.html" style="color: blue;">ログイン</a> が必要です．</span>
+        </div>
+        
+    </main>
+    
+    <div class="search-modal" id="search-modal">
+        <div class="spinner" id="spinner"></div>
+    </div>
+	
+	 <script src="assets/js/myProblems.js" type="module"></script>
+</body>
+</html>

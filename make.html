@@ -26,10 +26,118 @@
         <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo" onclick="window.location.href = 'index.html'">
         <div class="links">
             <a href="index.html">問題を解く</a>
-            <a href="make.html">問題を作る</a>
+            <a href="myProblems.html">問題を作る</a>
+        </div>
+        <div>
+            
+            <button class="login-btn" id="login-btn" onclick="window.location.href = `login.html`">
+            <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span>ログイン</span>
+            </button>
+            <span id="user-name"></span>
         </div>
     </header>
     <main>
+        <div class="container">
+            <div id="main">
+                <form id="problem-form">
+                    <h3>問題作成</h3>
+                    
+                    <div class="cp_iptxt">
+                        <div class="input-row">
+                            <h4>タイトル</h4>
+                            <label class="ef">
+                                <input
+                                    id="title"
+                                    type="text"
+                                    required
+                                    maxlength="15"
+                                    autocomplete="off">
+                            </label>
+                        </div>
+
+                        <span>15文字以下で入力してください．</span>
+                    </div>
+
+                    <div class="cp_iptxt textarea">
+                        <h4>問題</h4>
+                        <label class="ef">
+                            <textarea
+                                id="problem"
+                                placeholder="本文を入力してください"
+                                maxlength="1000"
+                                autocomplete="off"></textarea>
+                        </label>
+                        <div class="addition">
+                            <span>1000文字以下で入力してください．</span>
+                            <button type="button" class="preview-btn" id="problem-preview-btn">プレビュー</button>
+                        </div>
+                    </div>
+
+                    <div class="preview-container">
+                        <h4>プレビュー</h4>
+                        <div class="preview" id="problem-preview"></div>
+                    </div>
+<!--
+                    <div class="cp_iptxt textarea">
+                        <h4>解説</h4>
+                        <label class="ef">
+                            <textarea
+                                id="explanation"
+                                placeholder="本文を入力してください"
+                                maxlength="1000"
+                                autocomplete="off"></textarea>
+                        </label>
+                        <div class="addition">
+                            <span>1000文字以下で入力してください．</span>
+                            <button type="button" class="preview-btn" id="explanation-preview-btn">プレビュー</button>
+                        </div>
+                    </div>
+
+                    <div class="preview-container">
+                        <h4>プレビュー</h4>
+                        <div class="preview" id="explanation-preview"></div>
+                    </div>-->
+                    
+                    
+                    <div class="cp_iptxt">
+                        <div class="input-row">
+                            <h4>解答</h4>
+                            <label class="ef">
+                                <input
+                                    id="answer"
+                                    type="text"
+                                    required
+                                    pattern="[0-9]+"
+                                    autocomplete="off">
+                            </label>
+                        </div>
+
+                        <span>自然数値で入力してください．</span>
+                    </div>
+
+                    <div class="status">
+                        <h4>状態</h4>
+                        <span id="status"></span>
+                    </div>
+
+                    <div class="buttons">
+                        <div class="good-btns">
+                            <button type="submit" value="save" class="blue" formnovalidate>下書き保存</button>
+                            <button type="submit" value="publish" class="blue">公開</button>
+                        </div>
+                        <div class="bad-btn">    
+                            <button type="submit" value="delete" class="red" formnovalidate>削除</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <span id="message" class="message">問題を作成するには <a href="login.html" style="color: blue;">ログイン</a> が必要です．</span>
+        </div>
         
     </main>
     

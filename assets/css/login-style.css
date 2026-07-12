@@ -33,41 +33,6 @@
 .main h3 {
     margin: 8px auto 20px;
 }
-.cp_iptxt {
-  position: relative;
-  width: 70%;
-  margin: 20px auto 10px;
-}
-.cp_iptxt input[type='text'],
-.cp_iptxt input[type='password'] {
-  font: 15px/1.6 sans-serif;
-  width: 100%;
-  padding: 0.3em;
-  color: #616161;
-  border: none;
-  border-bottom: 2px solid #9b9b9b;
-  background: transparent;
-  transition: 0.3s;
-}
-.cp_iptxt .ef input[type='text']:focus,
-.cp_iptxt input[type='password']:focus {
-  border-bottom: 2px solid #3cda5e;
-  outline: none;
-}
-.cp_iptxt button {
-  position:absolute;
-  top: 0.45em;
-  right: 0.1em;
-  margin:0;
-  padding:0;
-  border:none;
-  background:none;
-}
-.cp_iptxt span {
-    font-size: 13px;
-    color: rgb(105, 105, 105);
-}
-
 .row {
     display: flex;
     align-items: center;
@@ -130,19 +95,7 @@
 .selectbox select:focus {
     outline: 1px solid #3cda5e;
 }
-.button {
-    background: none;
-    outline: none;
-    border: none;
-    color: rgb(33, 129, 255);
-    cursor: pointer;
-    padding: 8px 15px;
-    margin: 15px auto 20px;
-    transition: all 0.3s;
-}
-.button:hover {
-    background: #d4d4d4;
-}
+
 .error-msg {
     display: none;
     border: 1px solid red;

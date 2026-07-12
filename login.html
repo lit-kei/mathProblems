@@ -14,7 +14,7 @@
         <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo" onclick="window.location.href = 'index.html'">
         <div class="links">
             <a href="index.html">問題を解く</a>
-            <a href="make.html">問題を作る</a>
+            <a href="myProblems.html">問題を作る</a>
         </div>
     </header>
     <main>
@@ -46,9 +46,9 @@
                 
                     <div class="cp_iptxt">
                         <label class="ef"><input id="password" type="password" placeholder="パスワード" required autocomplete="off"></label>
-                         <button type="button" onclick="passwordview()"><i class="fa fa-eye-slash"></i></button>
+                         <button class="eye" type="button" onclick="passwordview()"><i class="fa fa-eye-slash"></i></button>
                     </div>
-                    <button type="submit" id="submit-btn" class="button">ログイン</button>
+                    <button type="submit" id="submit-btn" class="blue">ログイン</button>
                 </form>
                 <div class="error-msg" id="error-msg"><span>入力された内容が正しくありません．</span></div>
             </div>
