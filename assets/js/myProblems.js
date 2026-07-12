@@ -114,7 +114,8 @@ onAuthStateChanged(auth, async (user) => {
         login.style.display = "flex";
         userName.textContent = "";
         message.style.display = "block";
-        main.style.display ="none";
+        main.style.display = "none";
+        modal.style.display = "none";
     }
 });
 

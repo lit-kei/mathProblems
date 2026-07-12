@@ -55,10 +55,23 @@ const db = initializeFirestore(app, {
   }
 });
 
+const modal = document.getElementById('search-modal');
+const main = document.getElementById("main");
+const fragment = document.createDocumentFragment();
 const login = document.getElementById("login-btn");
 const userName = document.getElementById("user-name");
 let userID = "";
+let solved = [];
 const userCache = new Map();
+
+const colors = {
+    "A": "#c85151",
+    "N": "#c56b11",
+    "G": "#268f97",
+    "C": "#269733"
+};
+
+modal.style.display = "block";
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -70,81 +83,82 @@ onAuthStateChanged(auth, async (user) => {
             userName.innerHTML = `ようこそ，<span class="name ${data.color}">${data.username}</span>`;
             userCache.set(user.uid, data);
         });
+        
+        await getDocs(collection(db, "users", user.uid, "solved")).then(ansSnapshot => {
+            solved = ansSnapshot.docs.map(e => e.id);
+        });
+        
     } else {
         // 未ログイン
         login.style.display = "flex";
         userName.textContent = "";
     }
-});
+    
+    const q = query(
+        collection(db, "posts"),
+        where("status", "==", "approved"),
+        orderBy("createdAt", "desc")
+    );
 
+    const snapshot = await getDocs(q);
 
-const colors = {
-    "A": "#c85151",
-    "N": "#c56b11",
-    "G": "#268f97",
-    "C": "#269733"
-};
+    const uids = [...new Set(snapshot.docs.map(post => post.data().creator))];
 
-const modal = document.getElementById('search-modal');
-const main = document.getElementById("main");
-const fragment = document.createDocumentFragment();
+    await Promise.all(
+        uids.map(async (uid) => {
+            if (userCache.has(uid)) return;
 
-const q = query(
-    collection(db, "posts"),
-    where("status", "==", "approved"),
-    orderBy("createdAt", "desc")
-);
+            const snap = await getDoc(doc(db, "users", uid));
 
-modal.style.display = "block";
+            if (snap.exists()) {
+                userCache.set(uid, snap.data());
+            } else {
+                userCache.set(uid, {
+                    username: undefined
+                });
+            }
+        })
+    );
 
-const snapshot = await getDocs(q);
-
-const uids = [...new Set(snapshot.docs.map(post => post.data().creator))];
-
-await Promise.all(
-    uids.map(async (uid) => {
-        if (userCache.has(uid)) return;
-
-        const snap = await getDoc(doc(db, "users", uid));
-        console.log(snap.exists());
-
-        if (snap.exists()) {
-            userCache.set(uid, snap.data());
-        } else {
-            userCache.set(uid, {
-                username: undefined
-            });
-        }
-    })
-);
-
-snapshot.forEach(post => {
-    const data = post.data();
-    const content = marked.parse(data.content);
-    const user = userCache.get(post.data().creator);
-    const problem = document.createElement("div");
-    problem.className = "problem";
-    problem.innerHTML = `
-    <span class="category" style="background-color: ${colors[data.category]}">分野: ${data.category}</span>
-    <span class="creator"><span class="name ${user.color}">${user.username ?? "***"}</span></span>
-    <h3 class="title">${data.title}</h3>
-    <div class="content">${content}</div>
-    `;
-    problem.addEventListener('click', () => {
-        window.location.href = `solve.html?id=${post.id}`;
+    snapshot.forEach(post => {
+        const data = post.data();
+        const content = marked.parse(data.content);
+        const user = userCache.get(post.data().creator);
+        const problem = document.createElement("div");
+        problem.className = "problem";
+        
+        problem.innerHTML = `
+        ${solved.includes(post.id) ? `
+            <svg xmlns="http://w3.org" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+` : ""}
+        <span class="category" style="background-color: ${colors[data.category]}">分野: ${data.category}</span>
+        <span class="creator"><span class="name ${user.color}">${user.username ?? "***"}</span></span>
+        <h3 class="title">${data.title}</h3>
+        <div class="content">${content}</div>
+        `;
+        problem.addEventListener('click', () => {
+            window.location.href = `solve.html?id=${post.id}`;
+        });
+        problem.style.animationDelay = `${Math.random() * 0.4}s`;
+        fragment.append(problem);
     });
-    problem.style.animationDelay = `${Math.random() * 0.4}s`;
-    fragment.append(problem);
+    main.append(fragment);
+    await MathJax.typesetPromise([main]);
+    modal.style.display = "none";
 });
-main.append(fragment);
-await MathJax.typesetPromise([main]);
-modal.style.display = "none";
 
-/*
-document.getElementById("button").addEventListener('click', async () => {
+
+
+
+
+async function signout() {
     try {
         await signOut(auth)
     } catch (e) {
         console.log(e)
     }
-});*/
+}
+
+window.signout = signout;

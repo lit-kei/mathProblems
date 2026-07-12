@@ -67,7 +67,6 @@ onAuthStateChanged(auth, (user) => {
         document.getElementById("message").style.display = "none";
         document.getElementById("main").style.display = "block";
     }
-    console.log("checked");
 });
 
 

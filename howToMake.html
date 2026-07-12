@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数楽問題倉庫</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/howToMake.css">
+	<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [["$$", "$$"]]
+        },
+        options: {
+            enableMenu: false
+        }
+    };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="assets/image/logo.png" alt="数楽問題倉庫のロゴ" class="logo" onclick="window.location.href = 'index.html'">
+        <div class="links">
+            <a href="index.html">問題を解く</a>
+            <a href="myProblems.html">問題を作る</a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="main">
+<h2>問題文の作り方</h2>
+
+<p>　問題文を作成するときは，以下のルールに従ってください．</p>
+
+<h3>文章の書き方</h3>
+
+<p>　段落のはじめには，全角スペースを $1$ 文字分入れてください．</p>
+
+<p>　文章中で数字を使用する場合は，<strong>必ず$マークで囲んでください．</strong>例えば，「\$3\$ 個のりんご」のように記述します．</p>
+
+<p>　文体は常体または敬体のどちらかに統一してください．「〜である」と「〜です」を混在させないようにしてください．</p>
+
+<p>　句点には全角ピリオド「．」，読点には全角カンマ「，」を使用してください．ただし，数式内では通常の半角記号を使用してください．</p>
+
+<h3>Markdown記法</h3>
+
+<p>　文章はMarkdown記法に対応しています．文字を強調するときは<code>**強調したい文字**</code>，斜体にするときは<code>*斜体にしたい文字*</code>のように記述してください．</p>
+
+<p>　例： **重要な条件** → <strong>重要な条件</strong></p>
+
+<p>　　　　*補足説明* → <em>補足説明</em></p>
+
+<h3>数式の書き方</h3>
+
+<p>　インラインで数式を書く場合は，数式の前後に半角スペースを入れてください．ただし，数式の前後がコンマやピリオドの場合は半角スペースを入れる必要はありません．</p>
+
+<p>　数式はKaTeX形式に対応しています．<a href="https://manabitimes.jp/katex" target="_blank" rel="noopener noreferrer" style="color: blue;">必要に応じて記号を検索してください．</a></p>
+
+<p>　かけ算は $a \times b$ (\$ a \times b \$)，割り算は $ \frac{a}{b} $ (\$ \frac{a}{b} \$)と記述してください．</p>
+
+<p>　正しく記述することで，問題文をきれいに表示できます．</p>
+            </div>
+        </div>
+        
+    </main>
+    
+    <div class="search-modal" id="search-modal">
+        <div class="spinner" id="spinner"></div>
+    </div>
+	
+</body>
+</html>

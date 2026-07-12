@@ -143,6 +143,7 @@ form.addEventListener('submit', async (e) => {
         if (e.submitter.value == "delete") {
             // 削除
             await deleteDoc(doc(db, "posts", problemID));
+            hasUnsavedChanges = false;
             
             window.location.href = "myProblems.html";
         } else {

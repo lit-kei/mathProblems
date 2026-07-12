@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数楽問題倉庫</title>
 	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/solve.css">
+	<link rel="stylesheet" href="assets/css/answer.css">
 	<script>
     window.MathJax = {
         tex: {
@@ -43,27 +43,28 @@
     </header>
     <main>
         <div class="container">
-            <div class="main">
-                <h2 id="title"></h2>
-                <span class="creator">Creator: <span id="name" class="name"></span></span>
-                <div id="problem"></div>
-                <form id="form">
-                    <h3>解答</h3>
-                    <div class="cp_iptxt">
-                        <label class="ef">
-                                    <input
-                        id="answer"
-                        type="text"
-                        required
-                        pattern="[0-9]+"
-                        autocomplete="off">
-                        </label>
-                        <span>半角数字を用いて入力してください．</span>
-                    </div>
-                    <button type="submit" class="blue" id="submit-btn">送信</button>
-                </form>
-                <span id="message" class="message">問題に解答するには <a href="login.html" style="color: blue;">ログイン</a> が必要です．</span>
+            <div id="main">
+                <h3>回答一覧</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <th>日時</th>
+                            <th>ユーザー</th>
+                            <th>回答</th>
+                            <th>判定</th>
+                        </thead>
+                        <tbody id="tbody">
+                            <!--<tr>
+                                <td>2026-07-12</td>
+                                <td><span class="name">Kei</span></td>
+                                <td>2025</td>
+                                <td>不正解d</td>
+                            </tr>-->
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <span id="message" class="message">問題を作成するには <a href="login.html" style="color: blue;">ログイン</a> が必要です．</span>
         </div>
         
     </main>
@@ -72,6 +73,6 @@
         <div class="spinner" id="spinner"></div>
     </div>
 	
-	 <script src="assets/js/solve.js" type="module"></script>
+	 <script src="assets/js/answer.js" type="module"></script>
 </body>
 </html>

@@ -59,18 +59,11 @@ const db = initializeFirestore(app, {
 const login = document.getElementById("login-btn");
 const userName = document.getElementById("user-name");
 const modal = document.getElementById('search-modal');
-const message = document.getElementById("message");
-const title = document.getElementById("title");
-const problem = document.getElementById("problem");
-const name = document.getElementById("name");
-const answer = document.getElementById("answer");
-const submitBtn = document.getElementById("submit-btn");
-const form = document.getElementById("form");
+const tbody = document.getElementById("tbody");
 
 const params = new URLSearchParams(window.location.search);
 const problemID = params.get("id");
 let userID = "";
-let ans = "";
 
 modal.style.display = "block";
 
@@ -78,73 +71,49 @@ modal.style.display = "block";
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         // ログイン済み
-        message.style.display = "none";
-        submitBtn.classList.remove("NA");
-        submitBtn.formNoValidate = false;
         login.style.display = "none";
         userID = user.uid;
         await getDoc(doc(db, "users", user.uid)).then(async snapshot => {
             const data = snapshot.data();
             userName.innerHTML = `ようこそ，<span class="name ${data.color}">${data.username}</span>`;
+            
+            const q = query(
+                            collection(db, "answers"),
+                            where("problemID", "==", problemID),
+                            where("userID", "==", userID),
+                            orderBy("timestamp", "desc")
+                        );
+            
+            const myAnswers = await getDocs(q);
+            
+            myAnswers.forEach(answer => {
+                const date = answer.data().timestamp.toDate().toLocaleString("ja-JP", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                });
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                <td>${date}</td>
+                <td><span class="name ${data.color}">${data.username}</span></td>
+                <td>${answer.data().input}</td>
+                <td><span class="${answer.data().result == "正解" ? "correct" : "incorrect"}">${answer.data().result}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+            modal.style.display = "none";
         });
 
     } else {
         // 未ログイン
+        window.location.href = 'index.html';
         login.style.display = "flex";
-        userName.textContent = "";
-        message.style.display = "block";
-        submitBtn.classList.add("NA");
-        submitBtn.formNoValidate = true;
+        userName.textContent = "";  
     }
 });
 
-await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
-    if (!snapshot.exists()) return;
-    const data = snapshot.data();
-    ans = data.answer;
-    await getDoc(doc(db, "users", data.creator)).then(creator => {
-        if (!creator.exists()) {
-            name.textContent = "***";
-        } else {
-            const creatorData = creator.data();
-            name.textContent = creatorData.username;
-            name.classList.add(creatorData.color);
-        }
-        title.textContent = data.title;
-        problem.innerHTML = marked.parse(data.content);
 
-        MathJax.typeset();
 
-    });
-});
-
-modal.style.display = "none";
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (userID == "" || ans == "") return;
-    modal.style.display = "block";
-    if (answer.value == ans) {
-
-        const userRef = doc(db, "users", userID, "solved", problemID);
-
-        const snapshot = await getDoc(userRef);
-
-        if (!snapshot.exists()) {
-            // 存在しないので追加
-            await setDoc(userRef, {
-                timestamp: serverTimestamp()
-            });
-        }
-    }
-    const result = answer.value == ans ? "正解" : "不正解";
-    await addDoc(collection(db, "answers"), {
-        input: answer.value,
-        problemID: problemID,
-        result: result,
-        timestamp: serverTimestamp(),
-        userID: userID
-    });
-    modal.style.display = "none";
-    window.location.href = `answer.html?id=${problemID}`;
-});
