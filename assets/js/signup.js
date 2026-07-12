@@ -91,8 +91,8 @@ form.addEventListener("keydown", (e) => {
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    if (!/^[A-Za-z0-9]+$/.test(username.value)) {
-        alert("ユーザー名は半角英数字のみです。");
+    if (!/^[A-Za-z0-9_-]+$/.test(username.value)) {
+        alert("ユーザー名は半角英数字、ハイフン、アンダースコアのみです。");
         return;
     }
 
@@ -108,7 +108,17 @@ form.addEventListener("submit", async (e) => {
     }
 
 
-    const email = `${number.value}@school.local`;
+    const type = document.querySelector(
+    'input[name="account-type"]:checked'
+    ).value;
+
+    let email;
+
+    if (type === "school") {
+        email = `${number.value}@school.local`;
+    } else {
+        email = document.getElementById("email").value.trim();
+    }
 
     try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -119,16 +129,28 @@ form.addEventListener("submit", async (e) => {
 
         const user = userCredential.user;
 
-        await setDoc(doc(db, "users", user.uid), {
-            authorization: false,
-            username: username.value,
-            grade: Number(grade.value),
-            class: Number(cls.value),
-            stundentNum: Number(studentNumber.value),
-            number: Number(number.value),
-            color: "black",
-            createdAt: serverTimestamp()
-        });
+        if (type == "school") {
+            await setDoc(doc(db, "users", user.uid), {
+                authorization: false,
+                beitosei: true,
+                username: username.value,
+                grade: Number(grade.value),
+                class: Number(cls.value),
+                stundentNum: Number(studentNumber.value),
+                number: Number(number.value),
+                color: "black",
+                createdAt: serverTimestamp()
+            });
+        } else {
+            
+            await setDoc(doc(db, "users", user.uid), {
+                authorization: false,
+                beitosei: false,
+                username: username.value,
+                color: "black",
+                createdAt: serverTimestamp()
+            });
+        }
 
     } catch (error) {
         console.error(error);
@@ -153,7 +175,30 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
+const schoolFields = document.getElementById("school-fields");
+const generalFields = document.getElementById("general-fields");
 
+const schoolInputs = schoolFields.querySelectorAll("input, select");
+const generalInputs = generalFields.querySelectorAll("input");
+
+document.querySelectorAll('input[name="account-type"]').forEach(radio => {
+    radio.addEventListener("change", () => {
+
+        const isSchool = radio.value === "school";
+
+        schoolFields.style.display = isSchool ? "block" : "none";
+        generalFields.style.display = isSchool ? "none" : "block";
+
+        schoolInputs.forEach(input => {
+            input.required = isSchool;
+        });
+
+        generalInputs.forEach(input => {
+            input.required = !isSchool;
+        });
+
+    });
+});
 
 
 function passwordview(id, i) {

@@ -28,22 +28,47 @@
                 </div>
             </div>
             <div class="main" id="main">
+                <div class="account-type">
+                    <label>
+                        <input type="radio" name="account-type" value="school" checked>
+                        米子東高校生
+                    </label>
+
+                    <label>
+                        <input type="radio" name="account-type" value="general">
+                        一般利用者
+                    </label>
+                </div>
                 <form id="login-form">
-                    <div class="cp_iptxt">
-                        <label class="ef">
-                            <input
-    id="number"
-    type="text"
-    placeholder="生徒番号 (学生証を参照)"
-    required
-    minlength="7"
-    maxlength="7"
-    pattern="[0-9]+"
-    autocomplete="off">
-                        </label>
-                        <span>半角数字7桁で入力してください．</span>
+                    <div id="school-fields">
+                        <div class="cp_iptxt">
+                            <label class="ef">
+                                <input
+                                    id="number"
+                                    type="text"
+                                    placeholder="生徒番号 (学生証を参照)"
+                                    required
+                                    minlength="7"
+                                    maxlength="7"
+                                    pattern="[0-9]+"
+                                    autocomplete="off">
+                            </label>
+                            <span>半角数字7桁で入力してください．</span>
+                        </div>
                     </div>
                 
+                    <div id="general-fields" style="display:none;">
+                        <div class="cp_iptxt">
+                            <label class="ef">
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="メールアドレス"
+                                    autocomplete="email">
+                            </label>
+                        </div>
+                    </div>
+                    
                     <div class="cp_iptxt">
                         <label class="ef"><input id="password" type="password" placeholder="パスワード" required autocomplete="off"></label>
                          <button class="eye" type="button" onclick="passwordview()"><i class="fa fa-eye-slash"></i></button>

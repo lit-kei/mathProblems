@@ -31,8 +31,7 @@ form {
     margin: 10px 0;
     align-self: flex-start;
 }
-.cp_iptxt input[type='text'],
-.cp_iptxt input[type='password'],
+.cp_iptxt input
 textarea {
   font: 15px/1.6 sans-serif;
   width: 100%;
@@ -43,8 +42,7 @@ textarea {
   background: transparent;
   transition: 0.3s;
 }
-.cp_iptxt .ef input[type='text']:focus,
-.cp_iptxt input[type='password']:focus,
+.cp_iptxt .ef input:focus,
 textarea:focus {
   border-bottom: 2px solid #3cda5e;
   outline: none;

@@ -65,6 +65,15 @@ header {
     font-weight: 900;
     font-size: 17px;
 }
+.name.red {
+    color: red;
+}
+.name.blue {
+    color: blue;
+}
+.name.green {
+    color: rgb(5, 148, 5);
+}
 .name.rainbow {
     background: linear-gradient(
         90deg,
@@ -85,6 +94,44 @@ header {
     -webkit-text-fill-color: transparent;
 
     animation: gradientMove 4s linear infinite;
+}
+
+.name.gold {
+    background: linear-gradient(
+        90deg,
+        #5f3b00 0%,
+        #a66b00 16%,
+        #c48a00 33%,
+        #ffd54f 49%,
+        #8a5a00 66%,
+        #fff07c 83%,
+        #5f3b00 100%
+    );
+
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientMove 3s linear infinite;
+}
+.name.silver {
+    background: linear-gradient(
+        90deg,
+        #4d4d4d 0%,
+        #949494 20%,
+        #8d8d8d 40%,
+        #e6e6e6 60%,
+        #6f6f6f 80%,
+        #4d4d4d 100%
+    );
+
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientMove 3s linear infinite;
 }
 
 @keyframes gradientMove {
@@ -114,8 +161,7 @@ button.blue:hover {
   width: 70%;
   margin: 20px auto 10px;
 }
-.cp_iptxt input[type='text'],
-.cp_iptxt input[type='password'] {
+.cp_iptxt input {
   font: 15px/1.6 sans-serif;
   width: 100%;
   padding: 0.3em;
@@ -125,8 +171,7 @@ button.blue:hover {
   background: transparent;
   transition: 0.3s;
 }
-.cp_iptxt .ef input[type='text']:focus,
-.cp_iptxt input[type='password']:focus {
+.cp_iptxt .ef input:focus {
   border-bottom: 2px solid #3cda5e;
   outline: none;
 }

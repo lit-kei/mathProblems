@@ -84,8 +84,23 @@ form.addEventListener("keydown", (e) => {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = `${number.value}@school.local`;
+    const accountType = document.querySelector(
+    'input[name="account-type"]:checked'
+    ).value;
 
+    let email;
+
+    if (accountType === "school") {
+        email = `${number.value}@school.local`;
+    } else {
+        email = emailInput.value.trim();
+    }
+
+    await signInWithEmailAndPassword(
+        auth,
+        email,
+        password.value
+    );
     try {
         await signInWithEmailAndPassword(auth, email, password.value);
     } catch (e) {
@@ -94,7 +109,34 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
+const schoolFields = document.getElementById("school-fields");
+const generalFields = document.getElementById("general-fields");
 
+const schoolInput = document.getElementById("number");
+const generalInput = document.getElementById("email");
+
+document
+    .querySelectorAll('input[name="account-type"]')
+    .forEach(radio => {
+
+        radio.addEventListener("change", () => {
+
+            const isSchool =
+                document.querySelector(
+                    'input[name="account-type"]:checked'
+                ).value === "school";
+
+            schoolFields.style.display =
+                isSchool ? "block" : "none";
+
+            generalFields.style.display =
+                isSchool ? "none" : "block";
+
+            schoolInput.required = isSchool;
+            generalInput.required = !isSchool;
+        });
+
+    });
 
 function passwordview() {
   if (password.type == "password") {
