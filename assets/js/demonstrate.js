@@ -135,11 +135,9 @@ form.addEventListener('submit', async (e) => {
             answer: answer.value,
             category: category.value,
             content: problem.value,
-            createdAt: serverTimestamp(),
-            creator: userID,
             status: status.value,
             title: title.value
-        });
+        }, { merge: true });
         // 保存したら false にする
         hasUnsavedChanges = false;
         showToast();
