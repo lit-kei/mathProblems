@@ -104,7 +104,7 @@ onAuthStateChanged(auth, async (user) => {
                 status.textContent = data.status;
                 status.className = data.status;
                 problemPrevBtn.click();
-                if (data.status != "draft") form.classList.add("NA");
+                if (data.status != "draft" && data.status != "rejected") form.classList.add("NA");
                 else editable = true;
             });
 
@@ -141,7 +141,7 @@ form.addEventListener('submit', async (e) => {
 
     await getDoc(doc(db, "posts", problemID)).then(async myProblem => {
         const data = myProblem.data();
-        if (data.status != "draft") return;
+        if (data.status != "draft" && data.status != "rejected") return;
         if (e.submitter.value == "delete") {
             // 削除
             await deleteDoc(doc(db, "posts", problemID));
