@@ -57,7 +57,6 @@ const db = initializeFirestore(app, {
 
 const modal = document.getElementById('search-modal');
 const main = document.getElementById("main");
-const fragment = document.createDocumentFragment();
 const login = document.getElementById("login-btn");
 const userName = document.getElementById("user-name");
 let userID = "";
@@ -73,7 +72,13 @@ const colors = {
 
 modal.style.display = "block";
 
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth, async (user) => {    
+    main.innerHTML = "";
+
+    // 新しい DocumentFragment を作成
+    const fragment = document.createDocumentFragment();
+
+    
     if (user) {
         // ログイン済み
         login.style.display = "none";
