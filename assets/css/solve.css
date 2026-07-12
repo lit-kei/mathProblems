@@ -30,6 +30,8 @@ form h3 {
     margin: 0;
 }
 .cp_iptxt {
+    max-width: 100%;
+    width: 600px;
     margin: 10px 0 10px;
 }
 button.NA {
@@ -45,4 +47,3 @@ button.NA:hover {
     font-size: 15px; 
     margin: 20px; 
 }
-

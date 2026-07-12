@@ -72,6 +72,7 @@ const explanationPrev = document.getElementById("explanation-preview");*/
 const answer = document.getElementById("answer");
 const status = document.getElementById("status");
 let userID = "";
+let editable = false;
 let hasUnsavedChanges = false;
 const params = new URLSearchParams(window.location.search);
 const problemID = params.get("id");
@@ -103,7 +104,8 @@ onAuthStateChanged(auth, async (user) => {
                 status.textContent = data.status;
                 status.className = data.status;
                 problemPrevBtn.click();
-                if (data.status != "draft") form.classList.add("NA")
+                if (data.status != "draft") form.classList.add("NA");
+                else editable = true;
             });
 
             modal.style.display = "none";
@@ -169,7 +171,7 @@ form.addEventListener('submit', async (e) => {
 // 編集されたら true にする
 document.querySelectorAll("textarea, input").forEach(textarea => {
     textarea.addEventListener("input", () => {
-        hasUnsavedChanges = true;
+        if (editable) hasUnsavedChanges = true;
     });
 });
 
