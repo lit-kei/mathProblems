@@ -96,47 +96,40 @@ form.addEventListener('submit', async (e) => {
         email = emailInput.value.trim();
     }
 
-    await signInWithEmailAndPassword(
+    
+    try {
+        await signInWithEmailAndPassword(
         auth,
         email,
         password.value
     );
-    try {
-        await signInWithEmailAndPassword(auth, email, password.value);
     } catch (e) {
         console.error(e);
         errorMsg.style.display = "block";
     }
 });
-
 const schoolFields = document.getElementById("school-fields");
 const generalFields = document.getElementById("general-fields");
 
 const schoolInput = document.getElementById("number");
 const generalInput = document.getElementById("email");
 
-document
-    .querySelectorAll('input[name="account-type"]')
-    .forEach(radio => {
+function updateAccountType() {
+    const isSchool =
+        document.querySelector('input[name="account-type"]:checked').value === "school";
 
-        radio.addEventListener("change", () => {
+    schoolFields.style.display = isSchool ? "block" : "none";
+    generalFields.style.display = isSchool ? "none" : "block";
 
-            const isSchool =
-                document.querySelector(
-                    'input[name="account-type"]:checked'
-                ).value === "school";
+    schoolInput.required = isSchool;
+    generalInput.required = !isSchool;
+}
 
-            schoolFields.style.display =
-                isSchool ? "block" : "none";
+document.querySelectorAll('input[name="account-type"]').forEach(radio => {
+    radio.addEventListener("change", updateAccountType);
+});
 
-            generalFields.style.display =
-                isSchool ? "none" : "block";
-
-            schoolInput.required = isSchool;
-            generalInput.required = !isSchool;
-        });
-
-    });
+updateAccountType(); // ← ページ読み込み時にも実行
 
 function passwordview() {
   if (password.type == "password") {
