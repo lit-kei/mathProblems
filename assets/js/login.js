@@ -75,44 +75,67 @@ const form = document.getElementById("login-form");
 const number = document.getElementById("number");
 const password = document.getElementById("password");
 const errorMsg = document.getElementById("error-msg");
+const generalInput = document.getElementById("email");
 
 form.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         e.preventDefault();
     }
 });
-form.addEventListener('submit', async (e) => {
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    errorMsg.style.display = "none";
+
     const accountType = document.querySelector(
-    'input[name="account-type"]:checked'
+        'input[name="account-type"]:checked'
     ).value;
 
     let email;
 
     if (accountType === "school") {
+
+        if (!/^\d{7}$/.test(number.value)) {
+            errorMsg.querySelector("span").textContent =
+                "生徒番号を半角数字7桁で入力してください。";
+            errorMsg.style.display = "block";
+            return;
+        }
+
         email = `${number.value}@school.local`;
+
     } else {
-        email = emailInput.value.trim();
+
+        const emailValue = generalInput.value.trim();
+
+        if (emailValue === "") {
+            errorMsg.querySelector("span").textContent =
+                "メールアドレスを入力してください。";
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        email = emailValue;
     }
 
-    
+    if (password.value.length === 0) {
+        errorMsg.querySelector("span").textContent =
+            "パスワードを入力してください。";
+        errorMsg.style.display = "block";
+        return;
+    }
+
     try {
-        await signInWithEmailAndPassword(
-        auth,
-        email,
-        password.value
-    );
-    } catch (e) {
-        console.error(e);
+        await signInWithEmailAndPassword(auth, email, password.value);
+    } catch (err) {
+        console.error(err);
+        errorMsg.querySelector("span").textContent =
+            "メールアドレス（または生徒番号）またはパスワードが正しくありません。";
         errorMsg.style.display = "block";
     }
 });
 const schoolFields = document.getElementById("school-fields");
 const generalFields = document.getElementById("general-fields");
-
-const schoolInput = document.getElementById("number");
-const generalInput = document.getElementById("email");
 
 function updateAccountType() {
     const isSchool =
@@ -120,9 +143,6 @@ function updateAccountType() {
 
     schoolFields.style.display = isSchool ? "block" : "none";
     generalFields.style.display = isSchool ? "none" : "block";
-
-    schoolInput.required = isSchool;
-    generalInput.required = !isSchool;
 }
 
 document.querySelectorAll('input[name="account-type"]').forEach(radio => {

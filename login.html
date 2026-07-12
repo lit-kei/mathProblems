@@ -39,7 +39,7 @@
                         一般利用者
                     </label>
                 </div>
-                <form id="login-form">
+                <form id="login-form" novalidate>
                     <div id="school-fields">
                         <div class="cp_iptxt">
                             <label class="ef">
@@ -47,7 +47,6 @@
                                     id="number"
                                     type="text"
                                     placeholder="生徒番号 (学生証を参照)"
-                                    required
                                     minlength="7"
                                     maxlength="7"
                                     pattern="[0-9]+"
@@ -68,7 +67,7 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <div class="cp_iptxt">
                         <label class="ef"><input id="password" type="password" placeholder="パスワード" required autocomplete="off"></label>
                          <button class="eye" type="button" onclick="passwordview()"><i class="fa fa-eye-slash"></i></button>
