@@ -131,16 +131,31 @@ form.addEventListener('submit', async (e) => {
 
     await getDoc(doc(db, "posts", problemID)).then(async myProblem => {
         const data = myProblem.data();
-        const newProblem = await setDoc(doc(db, "posts", problemID), {
-            answer: answer.value,
-            category: category.value,
-            content: problem.value,
-            status: status.value,
-            title: title.value
-        }, { merge: true });
-        // 保存したら false にする
-        hasUnsavedChanges = false;
-        showToast();
+        if (status.value == "approved") {
+            if (title.value == "" || problem.vavlue == "" || answer.value == "" || category.value == "") {
+                showToast("未記入の項目があります");
+            } else {
+                const newProblem = await setDoc(doc(db, "posts", problemID), {
+                    answer: answer.value,
+                    category: category.value,
+                    content: problem.value,
+                    status: status.value,
+                    title: title.value
+                }, { merge: true });
+                showToast("公開しました");
+            }
+        } else {
+            const newProblem = await setDoc(doc(db, "posts", problemID), {
+                answer: answer.value,
+                category: category.value,
+                content: problem.value,
+                status: status.value,
+                title: title.value
+            }, { merge: true });
+            // 保存したら false にする
+            hasUnsavedChanges = false;
+            showToast();
+        }
         
         
     });

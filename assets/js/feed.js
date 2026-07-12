@@ -63,11 +63,11 @@ let userID = "";
 let solved = [];
 const userCache = new Map();
 
-const colors = {
-    "A": "#c85151",
-    "N": "#c56b11",
-    "G": "#268f97",
-    "C": "#269733"
+const subjects = {
+    "A": {text: "A (代数)", color: "#c85151"},
+    "N": {text: "N (整数)", color: "#c56b11"},
+    "G": {text: "G (幾何)", color: "#268f97"},
+    "C": {text: "C (組合せ)", color: "#269733"}
 };
 
 modal.style.display = "block";
@@ -138,7 +138,7 @@ onAuthStateChanged(auth, async (user) => {
             <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
 ` : ""}
-        <span class="category" style="background-color: ${colors[data.category]}">分野: ${data.category}</span>
+        <span class="category" style="background-color: ${subjects[data.category].color}">${subjects[data.category].text}</span>
         <span class="creator"><span class="name ${user.color}">${user.username ?? "***"}</span></span>
         <h3 class="title">${data.title}</h3>
         <div class="content">${content}</div>

@@ -62,6 +62,7 @@ const modal = document.getElementById('search-modal');
 const message = document.getElementById("message");
 const title = document.getElementById("title");
 const problem = document.getElementById("problem");
+const category = document.getElementById("category");
 const name = document.getElementById("name");
 const answer = document.getElementById("answer");
 const submitBtn = document.getElementById("submit-btn");
@@ -73,6 +74,13 @@ let userID = "";
 let ans = "";
 
 modal.style.display = "block";
+
+const subjects = {
+    "A": {text: "A (代数)", color: "#c85151"},
+    "N": {text: "N (整数)", color: "#c56b11"},
+    "G": {text: "G (幾何)", color: "#268f97"},
+    "C": {text: "C (組合せ)", color: "#269733"}
+};
 
 
 onAuthStateChanged(auth, async (user) => {
@@ -112,6 +120,8 @@ await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
         }
         title.textContent = data.title;
         problem.innerHTML = marked.parse(data.content);
+        category.textContent = subjects[data.category].text;
+        category.style.backgroundColor = subjects[data.category].color;
 
         MathJax.typeset();
 
