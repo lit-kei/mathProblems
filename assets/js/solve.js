@@ -64,6 +64,7 @@ const title = document.getElementById("title");
 const problem = document.getElementById("problem");
 const category = document.getElementById("category");
 const name = document.getElementById("name");
+const rate = document.getElementById("rate");
 const answer = document.getElementById("answer");
 const submitBtn = document.getElementById("submit-btn");
 const form = document.getElementById("form");
@@ -104,6 +105,17 @@ onAuthStateChanged(auth, async (user) => {
         submitBtn.classList.add("NA");
         submitBtn.formNoValidate = true;
     }
+});
+
+let correct = 0, total = 0;
+getDocs(query(collection(db,"answers"), where("problemID", "==", problemID))).then(snapshot => {
+    snapshot.forEach(doc => {
+        total++;
+        if (doc.data().result == "正解") correct++;
+    });
+    const percent = total === 0 ? "0.0" : (correct / total * 100).toFixed(1);
+    rate.innerHTML = `${percent}% ( ${correct} / ${total} )`;
+    MathJax.typeset();
 });
 
 await getDoc(doc(db, "posts", problemID)).then(async snapshot => {

@@ -140,6 +140,7 @@ form.addEventListener('submit', async (e) => {
                     category: category.value,
                     content: problem.value,
                     status: status.value,
+                    createdAt: serverTimestamp(),
                     title: title.value
                 }, { merge: true });
                 showToast("公開しました");
@@ -151,6 +152,7 @@ form.addEventListener('submit', async (e) => {
                 category: category.value,
                 content: problem.value,
                 status: status.value,
+                createdAt: serverTimestamp(),
                 title: title.value
             }, { merge: true });
             // 保存したら false にする
@@ -200,3 +202,26 @@ function showToast(message = "保存しました") {
         toast.classList.remove("show");
     }, 2000);
 }
+
+function replace(before = false, after = false) {
+    if (!before) before = prompt("置換前の文字列");
+    if (before === null) return;
+    if (!after) after = prompt("置換後の文字列");
+    
+    const count = problem.value.split(before).length - 1;
+
+    problem.value = problem.value.replaceAll(before, after);
+    
+    hasUnsavedChanges = true;
+    problemPrevBtn.click(); // プレビュー更新
+    
+    console.log(`${count}箇所置換しました。`);
+}
+
+document.getElementById("usual-replace-btn").addEventListener("click", () => {
+    replace("。", "．");
+    replace("、", "，");
+});
+document.getElementById("general-replace-btn").addEventListener("click", () => {
+    replace();
+});

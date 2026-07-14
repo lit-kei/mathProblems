@@ -27,6 +27,14 @@ h2 {
     font-size: 30px;
     display: inline;
 }
+.info {
+    margin: 10px 0;
+}
+.rate {
+    font-weight: 700;
+    font-size: 17px;
+
+}
 .category {
     border-radius: 10px;
     background-color: white;
