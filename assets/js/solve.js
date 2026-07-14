@@ -92,6 +92,17 @@ onAuthStateChanged(auth, async (user) => {
         submitBtn.formNoValidate = false;
         login.style.display = "none";
         userID = user.uid;
+        const solvedRef = doc(db, "users", user.uid, "solved", problemID);
+        const solvedSnap = await getDoc(solvedRef);
+
+        if (solvedSnap.exists()) {
+            message.textContent = "この問題はすでに解答済みです。";
+            submitBtn.disabled = true;
+            answer.disabled = true;
+            submitBtn.classList.add("NA");
+
+            message.style.display = "block";
+        }
         await getDoc(doc(db, "users", user.uid)).then(async snapshot => {
             const data = snapshot.data();
             userName.innerHTML = `ようこそ，<span class="name ${data.color}">${data.username}</span>`;
@@ -142,31 +153,53 @@ await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
 
 modal.style.display = "none";
 
+let submitting = false;
+
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (userID == "" || ans == "") return;
-    modal.style.display = "block";
-    if (answer.value == ans) {
 
-        const userRef = doc(db, "users", userID, "solved", problemID);
+    if (submitting) return;
+    submitting = true;
 
-        const snapshot = await getDoc(userRef);
+    try {
 
-        if (!snapshot.exists()) {
-            // 存在しないので追加
-            await setDoc(userRef, {
-                timestamp: serverTimestamp()
-            });
+        if (userID == "" || ans == "") return;
+
+        
+        const solvedRef = doc(db, "users", userID, "solved", problemID);
+        const solvedSnap = await getDoc(solvedRef);
+
+        if (solvedSnap.exists()) {
+            alert("この問題はすでに解答済みです。");
+            return;
         }
+
+        modal.style.display = "block";
+        if (answer.value == ans) {
+
+            const userRef = doc(db, "users", userID, "solved", problemID);
+
+            const snapshot = await getDoc(userRef);
+
+            if (!snapshot.exists()) {
+                // 存在しないので追加
+                await setDoc(userRef, {
+                    timestamp: serverTimestamp()
+                });
+            }
+        }
+        const result = answer.value == ans ? "正解" : "不正解";
+        await addDoc(collection(db, "answers"), {
+            input: answer.value,
+            problemID: problemID,
+            result: result,
+            timestamp: serverTimestamp(),
+            userID: userID
+        });
+        modal.style.display = "none";
+        window.location.href = `answer.html?id=${problemID}`;
+    } finally {
+        submitting = false;
     }
-    const result = answer.value == ans ? "正解" : "不正解";
-    await addDoc(collection(db, "answers"), {
-        input: answer.value,
-        problemID: problemID,
-        result: result,
-        timestamp: serverTimestamp(),
-        userID: userID
-    });
-    modal.style.display = "none";
-    window.location.href = `answer.html?id=${problemID}`;
 });
