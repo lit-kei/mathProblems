@@ -135,9 +135,22 @@ getDocs(query(collection(db,"answers"), where("problemID", "==", problemID))).th
 });
 
 await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
-    if (!snapshot.exists()) return;
+    if (!snapshot.exists()) {
+        window.location.href = "index.html";
+        return;
+    }
+
     const data = snapshot.data();
+
+    // 承認されていない問題は表示しない
+    if (data.status !== "approve") {
+        window.location.href = "index.html";
+        
+        return;
+    }
+
     ans = data.answer;
+
     await getDoc(doc(db, "users", data.creator)).then(creator => {
         if (!creator.exists()) {
             name.textContent = "***";
@@ -152,7 +165,6 @@ await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
         category.style.backgroundColor = subjects[data.category].color;
 
         MathJax.typeset();
-
     });
 });
 

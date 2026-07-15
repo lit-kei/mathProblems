@@ -74,6 +74,26 @@ header {
 .name.green {
     color: rgb(5, 148, 5);
 }
+.name.pink {
+    color: #e91e63;
+}
+.name.purple {
+    color: rgb(179, 7, 179);
+}
+.name.edging.edging {
+    color: #fff;
+    -webkit-text-stroke: 1px #dc3535;
+}
+.name.neon-cyan {
+    color: #007ea7;
+    -webkit-text-stroke: 0.4px #ffffff;
+
+    text-shadow:
+        0 0 1px #ffffff,
+        0 0 4px rgba(13,202,240,.6),
+        0 0 8px rgba(13,202,240,.45),
+        0 0 14px rgba(13,202,240,.3);
+}
 .name.rainbow {
     background: linear-gradient(
         90deg,

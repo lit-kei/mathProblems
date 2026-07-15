@@ -154,7 +154,44 @@ onAuthStateChanged(auth, async (user) => {
     modal.style.display = "none";
 });
 
+/*
+const snapshot = await getDocs(collection(db, "answers"));
 
+const map = new Map();
+
+snapshot.forEach(docSnap => {
+    const data = docSnap.data();
+
+    if (data.result !== "正解") return;
+
+    const key = `${data.userID}_${data.problemID}`;
+
+    if (!map.has(key)) {
+        map.set(key, [{
+            id: docSnap.id,
+            timestamp: data.timestamp
+        }]);
+    } else {
+        map.get(key).push({
+            id: docSnap.id,
+            timestamp: data.timestamp
+        });
+    }
+});
+
+for (const [, list] of map) {
+
+    if (list.length <= 1) continue;
+
+    // 古い順に並べる
+    list.sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis());
+
+    // 2件目以降を削除
+    for (let i = 1; i < list.length; i++) {
+        console.log("delete", list[i].id);
+        //await deleteDoc(doc(db, "answers", list[i].id));
+    }
+}*/
 
 
 
