@@ -68,6 +68,7 @@ const rate = document.getElementById("rate");
 const answer = document.getElementById("answer");
 const submitBtn = document.getElementById("submit-btn");
 const form = document.getElementById("form");
+const answerBtn = document.getElementById("answer-btn");
 
 const params = new URLSearchParams(window.location.search);
 const problemID = params.get("id");
@@ -75,6 +76,10 @@ let userID = "";
 let ans = "";
 
 modal.style.display = "block";
+
+answerBtn.addEventListener('click', () => {
+    window.location.href = `answer.html?id=${problemID}`;
+});
 
 const subjects = {
     "A": {text: "A (代数)", color: "#c85151"},

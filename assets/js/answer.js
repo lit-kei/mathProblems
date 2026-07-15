@@ -68,6 +68,10 @@ let userID = "";
 modal.style.display = "block";
 
 
+document.getElementById("solve-btn").addEventListener('click', () => {
+    window.location.href = `solve.html?id=${problemID}`;
+});
+
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         // ログイン済み
