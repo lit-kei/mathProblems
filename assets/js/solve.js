@@ -143,7 +143,8 @@ await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
     const data = snapshot.data();
 
     // 承認されていない問題は表示しない
-    if (data.status !== "approve") {
+    if (data.status !== "approved") {
+        alert("承認されていません。")
         window.location.href = "index.html";
         
         return;
