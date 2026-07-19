@@ -209,6 +209,27 @@ button.blue:hover {
     color: rgb(105, 105, 105);
 }
 
+.markdown-body table {
+    border-collapse: collapse;
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid #d0d7de;
+    padding: 6px 13px;
+}
+
+.markdown-body th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+}
+
+.markdown-body tr:nth-child(even) {
+    background-color: #fafbfc;
+}
 
 .search-modal {
   position: fixed;
