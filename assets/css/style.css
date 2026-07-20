@@ -242,13 +242,24 @@ button.blue:hover {
     color: #444;
     user-select: none;
 }
-
-
 .markdown-body details[open] summary {
     margin-bottom: 0.8em;
 }
 
 .markdown-body details p {
+    margin: 0.5em 0;
+}
+.markdown-body blockquote {
+    position: relative;
+    color: #333;
+    margin: 1.5em 0;
+    padding: 0.3em 1em 0.3em 1.5em;
+    border: 1px solid #ddd;
+    border-left: 4px solid #aaa;
+}
+
+
+.markdown-body blockquote p {
     margin: 0.5em 0;
 }
 
