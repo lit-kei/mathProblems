@@ -161,7 +161,7 @@ await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
             name.classList.add(creatorData.color);
         }
         title.textContent = data.title;
-        problem.innerHTML = marked.parse(data.content);
+        problem.innerHTML = DOMPurify.sanitize(marked.parse(data.content));
         category.textContent = subjects[data.category].text;
         category.style.backgroundColor = subjects[data.category].color;
 

@@ -127,7 +127,7 @@ onAuthStateChanged(auth, async (user) => {
 
     snapshot.forEach(post => {
         const data = post.data();
-        const content = marked.parse(data.content);
+        const content = DOMPurify.sanitize(marked.parse(data.content));
         const user = userCache.get(post.data().creator);
         const problem = document.createElement("div");
         problem.className = "problem";

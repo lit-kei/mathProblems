@@ -230,6 +230,27 @@ button.blue:hover {
 .markdown-body tr:nth-child(even) {
     background-color: #fafbfc;
 }
+.markdown-body details {
+    margin: 1.5em 0;
+    padding: 0.8em 1em;
+    border: 1px solid #ddd;
+}
+
+.markdown-body details summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #444;
+    user-select: none;
+}
+
+
+.markdown-body details[open] summary {
+    margin-bottom: 0.8em;
+}
+
+.markdown-body details p {
+    margin: 0.5em 0;
+}
 
 .search-modal {
   position: fixed;

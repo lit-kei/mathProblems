@@ -122,7 +122,7 @@ onAuthStateChanged(auth, async (user) => {
 
 problemPrevBtn.addEventListener('click', () => { 
     const text = problem.value;
-    problemPrev.innerHTML = marked.parse(text);
+    problemPrev.innerHTML = DOMPurify.sanitize(marked.parse(text));
     MathJax.typeset();
 });
 
