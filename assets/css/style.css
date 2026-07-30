@@ -115,7 +115,28 @@ header {
 
     animation: gradientMove 4s linear infinite;
 }
+.name.anti-rainbow {
+    background: linear-gradient(
+        90deg,
+        #00e5ff 0%,
+        #00bcd4 15%,
+        #00ffd5 25%,
+        #00ffa2 35%,
+        #76ff03 50%,
+        #ffee58 65%,
+        #00bcd4 80%,
+        #4caf50 90%,
+        #00e5ff 100%
+    );
 
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+
+    animation: gradientMove 4s linear infinite;
+}
 .name.gold {
     background: linear-gradient(
         90deg,
