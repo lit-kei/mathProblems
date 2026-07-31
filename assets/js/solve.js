@@ -162,6 +162,10 @@ await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
         }
         title.textContent = data.title;
         problem.innerHTML = DOMPurify.sanitize(marked.parse(data.content));
+        problem.querySelectorAll("a").forEach(a => {
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+        });
         category.textContent = subjects[data.category].text;
         category.style.backgroundColor = subjects[data.category].color;
 

@@ -123,6 +123,10 @@ onAuthStateChanged(auth, async (user) => {
 problemPrevBtn.addEventListener('click', () => { 
     const text = problem.value;
     problemPrev.innerHTML = DOMPurify.sanitize(marked.parse(text));
+    problemPrev.querySelectorAll("a").forEach(a => {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+    });
     MathJax.typeset();
 });
 

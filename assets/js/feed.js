@@ -143,6 +143,10 @@ onAuthStateChanged(auth, async (user) => {
         <h3 class="title">${data.title}</h3>
         <div class="content">${content}</div>
         `;
+        problem.querySelectorAll("a").forEach(a => {
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+        });
         problem.addEventListener('click', () => {
             window.location.href = `solve.html?id=${post.id}`;
         });
