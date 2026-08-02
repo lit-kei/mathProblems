@@ -101,7 +101,7 @@ onAuthStateChanged(auth, async (user) => {
     
     const q = query(
         collection(db, "posts"),
-        where("status", "==", "approved"),
+        where("status", "in", ["approved"/*, "partial-approved"*/]),
         orderBy("createdAt", "desc")
     );
 
@@ -154,8 +154,8 @@ onAuthStateChanged(auth, async (user) => {
         fragment.append(problem);
     });
     main.append(fragment);
-    await MathJax.typesetPromise([main]);
     modal.style.display = "none";
+    await MathJax.typesetPromise([main]);
 });
 
 /*

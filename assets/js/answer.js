@@ -65,6 +65,8 @@ const params = new URLSearchParams(window.location.search);
 const problemID = params.get("id");
 let userID = "";
 
+let animation100 = false;
+
 modal.style.display = "block";
 
 
@@ -87,10 +89,11 @@ onAuthStateChanged(auth, async (user) => {
                             where("userID", "==", userID),
                             orderBy("timestamp", "desc")
                         );
-            
+            const problemDataDoc = await getDoc(doc(db, "posts", problemID));
             const myAnswers = await getDocs(q);
-            
+            document.getElementById("title").textContent = problemDataDoc.data().title;
             myAnswers.forEach(answer => {
+                if (problemID === "q286WcD8GmxeTq8SMiSO" && answer.data().result === "正解") animation100 = true;
                 const date = answer.data().timestamp.toDate().toLocaleString("ja-JP", {
                     year: "numeric",
                     month: "2-digit",
@@ -103,12 +106,66 @@ onAuthStateChanged(auth, async (user) => {
                 tr.innerHTML = `
                 <td>${date}</td>
                 <td><span class="name ${data.color}">${data.username}</span></td>
-                <td>${answer.data().input}</td>
+                <td><span id="${answer.data().result == "正解" ? "correct" : ""}">${answer.data().input}</span></td>
                 <td><span class="${answer.data().result == "正解" ? "correct" : "incorrect"}">${answer.data().result}</span></td>
                 `;
                 tbody.appendChild(tr);
             });
+            
             modal.style.display = "none";
+            if (animation100) {
+                const correct = document.getElementById("correct");
+                correct.style.position = "absolute";
+                document.getElementById("title").innerHTML = "カジノ？　No.<span id=\"question-mark\">???</span>";
+                setTimeout(() => {
+                    // アニメーション処理
+                    document.getElementById("title").style.transform = "scale(1.2)";
+                    document.getElementById("modal100").style.display = "block";
+
+                }, 700);
+                setTimeout(() => {
+                    correct.style.transform = "scale(1.2)";
+                    correct.style.fontSize = "28.8px";
+                    correct.style.fontWeight = "900";
+                }, 1500);
+                setTimeout(() => {
+                    const rect1 = correct.getBoundingClientRect();
+                    const questions = document.getElementById("question-mark");
+                    const rect2 = questions.getBoundingClientRect();
+                    const dx =
+                        rect2.left + rect2.width/2
+                        - (rect1.left + rect1.width/2);
+
+                    const dy =
+                        rect2.top + rect2.height/2
+                        - (rect1.top + rect1.height/2);
+                    correct.style.transform = `translate(${dx}px, ${dy}px)`;
+                }, 2500);
+                setTimeout(() => {
+                    const questions = document.getElementById("question-mark").textContent = "100";
+                }, 3400);
+                setTimeout(() => {
+
+                    correct.style = '';
+                    correct.style.position = "absolute";
+                    document.getElementById("title").style = "";
+                }, 3500);
+                setTimeout(() => {
+                    document.getElementById("message100").style.display = "block";
+                    document.getElementById("modal100").style.display = "none";
+                    correct.style.position = "relative";
+                }, 4500);
+                
+                /*setTimeout(() => {
+                    document.getElementById("title").textContent = "カジノ？　No.1??";
+                }, 1500);
+                setTimeout(() => {
+                    document.getElementById("title").textContent = "カジノ？　No.10?";
+                }, 2000);
+                setTimeout(() => {
+                    document.getElementById("title").textContent = "カジノ？　No.100";
+                }, 2500);*/
+            }
         });
 
     } else {

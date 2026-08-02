@@ -45,8 +45,10 @@
     <main>
         <div class="container">
             <div id="main">
-                <h3>回答一覧</h3>
+                <h2 id="title">---</h2>
+                <span id="message100" class="message">数楽問題倉庫の 100 問目の問題です！ 解いてくれてありがとう！</span>
                 <button type="button" id="solve-btn" class="blue" style="display: block; margin-bottom: 15px;">問題を見る</button>
+                <h3>回答一覧</h3>
                 <div class="table-wrapper">
                     <table>
                         <thead>
@@ -67,12 +69,16 @@
                 </div>
             </div>
             <span id="message" class="message">問題を作成するには <a href="login.html" style="color: blue;">ログイン</a> が必要です．</span>
+            
         </div>
         
     </main>
     
     <div class="search-modal" id="search-modal">
         <div class="spinner" id="spinner"></div>
+    </div>
+    <div id="modal100">
+
     </div>
 	
 	 <script src="assets/js/answer.js" type="module"></script>
