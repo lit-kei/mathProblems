@@ -76,17 +76,18 @@ main {
 }
 
 .main {
-    display: grid;
-    width: min(100%, 1610px);
-    grid-template-columns: repeat(4, minmax(0, 380px));
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    margin: 0 auto;
+    margin: 0 20px;
 }
 
 .problem {
     position: relative;
-    width: 100%;
+    width: 380px;
+    flex: 0 0 380px;
     height: 230px;
     border-radius: 10px;
     cursor: pointer;
@@ -103,7 +104,7 @@ main {
     position: absolute;
     inset: 10px 12px auto;
     display: grid;
-    grid-template-columns: minmax(92px, 1fr) auto minmax(92px, 1fr);
+    grid-template-columns: 130px 80px 130px;
     align-items: start;
     gap: 8px;
 }
@@ -127,12 +128,10 @@ main {
 
 .problem .rate {
     color: #385151;
-    background-color: #f4f4f4;
-    border: 1px solid #d0d7de;
     justify-self: center;
-    width: 104px;
+    width: 80px;
     text-align: center;
-    padding: 3px 8px 5px;
+    padding: 0;
     display: inline-flex;
     flex-direction: column;
     gap: 3px;
@@ -182,6 +181,7 @@ main {
     justify-self: end;
     width: 28px;
     height: 28px;
+    grid-column: 3;
 }
 
 .problem .creator {
@@ -276,24 +276,7 @@ main {
     }
 
     .main {
-        grid-template-columns: 1fr;
-    }
-
-    .problem {
-        width: min(100%, 380px);
-        justify-self: center;
-    }
-}
-
-@media (min-width: 721px) and (max-width: 880px) {
-    .main {
-        grid-template-columns: repeat(2, minmax(0, 380px));
-    }
-}
-
-@media (min-width: 881px) and (max-width: 1280px) {
-    .main {
-        grid-template-columns: repeat(3, minmax(0, 380px));
+        margin: 0;
     }
 }
 
