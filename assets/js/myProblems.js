@@ -128,6 +128,11 @@ document.getElementById("new-btn").addEventListener('click', async () => {
         content: "",
         createdAt: serverTimestamp(),
         creator: userID,
+        answerCount: 1,
+        correctCount: 1,
+        correctRate: 100,
+        correctRateSortKey: 100,
+        creatorIncludedInStats: true,
         status: "draft",
         title: ""
     });

@@ -1,0 +1,12 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs18"
+    }
+  ],
+  "firestore": {
+    "indexes": "firestore.indexes.json"
+  }
+}

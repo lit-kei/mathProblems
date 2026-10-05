@@ -159,6 +159,11 @@ form.addEventListener('submit', async (e) => {
                 content: problem.value,
                 createdAt: serverTimestamp(),
                 creator: userID,
+                answerCount: data.answerCount ?? 0,
+                correctCount: data.correctCount ?? 0,
+                correctRate: data.correctRate ?? 0,
+                correctRateSortKey: data.correctRateSortKey ?? 101,
+                creatorIncludedInStats: data.creatorIncludedInStats ?? false,
                 status: e.submitter.value == "save" ? "draft" : "submitted",
                 title: title.value
             });

@@ -74,6 +74,7 @@ const params = new URLSearchParams(window.location.search);
 const problemID = params.get("id");
 let userID = "";
 let ans = "";
+let problemCreatorID = "";
 
 modal.style.display = "block";
 
@@ -112,6 +113,7 @@ onAuthStateChanged(auth, async (user) => {
             const data = snapshot.data();
             userName.innerHTML = `ようこそ，<span class="name ${data.color}">${data.username}</span>`;
         });
+        updateCreatorSolvedState();
 
     } else {
         // 未ログイン
@@ -121,17 +123,6 @@ onAuthStateChanged(auth, async (user) => {
         submitBtn.classList.add("NA");
         submitBtn.formNoValidate = true;
     }
-});
-
-let correct = 0, total = 0;
-getDocs(query(collection(db,"answers"), where("problemID", "==", problemID))).then(snapshot => {
-    snapshot.forEach(doc => {
-        total++;
-        if (doc.data().result == "正解") correct++;
-    });
-    const percent = total === 0 ? "0.0" : (correct / total * 100).toFixed(1);
-    rate.innerHTML = `${percent}% ( ${correct} / ${total} )`;
-    MathJax.typeset();
 });
 
 await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
@@ -151,6 +142,9 @@ await getDoc(doc(db, "posts", problemID)).then(async snapshot => {
     }
 
     ans = data.answer;
+    problemCreatorID = data.creator;
+    updateRate(data);
+    updateCreatorSolvedState();
 
     await getDoc(doc(db, "users", data.creator)).then(creator => {
         if (!creator.exists()) {
@@ -177,6 +171,29 @@ modal.style.display = "none";
 
 let submitting = false;
 
+function updateRate(data) {
+    const answerCount = Number(data.answerCount ?? 0);
+    const correctCount = Number(data.correctCount ?? 0);
+    const correctRate = Number(data.correctRate);
+
+    if (answerCount <= 0 || !Number.isFinite(correctRate)) {
+        rate.textContent = "--";
+        return;
+    }
+
+    rate.textContent = `${correctRate.toFixed(1)}% ( ${correctCount} / ${answerCount} )`;
+}
+
+function updateCreatorSolvedState() {
+    if (!userID || !problemCreatorID || userID !== problemCreatorID) return;
+
+    message.textContent = "この問題の作成者なので，正解扱いです。";
+    submitBtn.disabled = true;
+    answer.disabled = true;
+    submitBtn.classList.add("NA");
+    message.style.display = "block";
+}
+
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -187,6 +204,10 @@ form.addEventListener('submit', async (e) => {
     try {
 
         if (userID == "" || ans == "") return;
+        if (userID === problemCreatorID) {
+            alert("作成者は正解扱いのため，解答を送信できません。");
+            return;
+        }
 
         
         const solvedRef = doc(db, "users", userID, "solved", problemID);

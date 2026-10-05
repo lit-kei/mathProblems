@@ -46,8 +46,13 @@
     <main>
         <div class="filter" id="filter">
             <button type="button" id="createdAt-fil" class="on">追加順</button>
-            <button type="button" id="difficulty-fil" class="NA">正答率順</button>
+            <button type="button" id="difficulty-fil">正答率順</button>
         </div>
+        <form class="search-box" id="search-form">
+            <input id="search-input" type="search" placeholder="問題を検索" autocomplete="off">
+            <button type="submit">検索</button>
+            <button type="button" id="clear-search-btn">クリア</button>
+        </form>
         <div class="markdown-body">
             <div class="main" id="main">
                 <!--
@@ -68,6 +73,12 @@
                 </div>
             -->
             </div>
+        </div>
+        <p class="empty-message" id="empty-message"></p>
+        <div class="pagination" aria-label="ページ操作">
+            <button type="button" id="prev-page-btn">前へ</button>
+            <span id="page-info">1ページ目</span>
+            <button type="button" id="next-page-btn">次へ</button>
         </div>
         <!--<button type="button" id="button">ログアウトできるよ</button>-->
     </main>

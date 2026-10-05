@@ -136,13 +136,18 @@ form.addEventListener('submit', async (e) => {
     await getDoc(doc(db, "posts", problemID)).then(async myProblem => {
         const data = myProblem.data();
         if (status.value == "approved") {
-            if (title.value == "" || problem.vavlue == "" || answer.value == "" || category.value == "") {
+            if (title.value == "" || problem.value == "" || answer.value == "" || category.value == "") {
                 showToast("未記入の項目があります");
             } else {
                 const newProblem = await setDoc(doc(db, "posts", problemID), {
                     answer: answer.value,
                     category: category.value,
                     content: problem.value,
+                    answerCount: data.answerCount ?? 0,
+                    correctCount: data.correctCount ?? 0,
+                    correctRate: data.correctRate ?? 0,
+                    correctRateSortKey: data.correctRateSortKey ?? 101,
+                    creatorIncludedInStats: data.creatorIncludedInStats ?? false,
                     status: status.value,
                     createdAt: serverTimestamp(),
                     title: title.value
@@ -155,6 +160,11 @@ form.addEventListener('submit', async (e) => {
                 answer: answer.value,
                 category: category.value,
                 content: problem.value,
+                answerCount: data.answerCount ?? 0,
+                correctCount: data.correctCount ?? 0,
+                correctRate: data.correctRate ?? 0,
+                correctRateSortKey: data.correctRateSortKey ?? 101,
+                creatorIncludedInStats: data.creatorIncludedInStats ?? false,
                 status: status.value,
                 createdAt: serverTimestamp(),
                 title: title.value
